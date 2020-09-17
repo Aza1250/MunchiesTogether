@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  IntroductoryView.swift
 //  MunchiesTogether
 //
 //  Created by Aziz on 2020-09-14.
@@ -8,12 +8,6 @@
 
 import SwiftUI
 import UIKit
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        IntroductionView()
-    }
-}
 
 //  var mainColor: Color = Color(Color.RGBColorSpace.sRGB, red: 255.0, green: 255.0, blue: 0.0, opacity: 1)
 

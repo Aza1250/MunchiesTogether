@@ -15,6 +15,7 @@ struct HomeView: View {
             LinearGradient(gradient: .init(colors: [Color("Color"), Color("Color1"), Color("Color2")]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
             
             LogoView()
+            
         }
     }
 }
@@ -64,9 +65,13 @@ struct LogoView: View {
             .clipShape(Capsule())
             .padding(.top, 50)
             
-            
-            LoginView()
+            if self.index == 1 {
+                LoginView()
+            } else {
+                RegisterView()
+            }
         }
+        .padding()
     }
 }
 
@@ -80,7 +85,79 @@ struct LoginView : View {
             HStack(spacing: 15) {
                 Image(systemName: "envelope")
                     .foregroundColor(.black)
-                TextField("Enter Email Address", text: self.$email)
+                TextField("Enter Email Address", text: self.$email).foregroundColor(.black)
+            }.padding(.vertical, 20)
+            
+            
+            Divider()
+            
+            HStack(spacing: 15) {
+                Image(systemName: "lock")
+                    .resizable()
+                    .frame(width: 15, height: 18)
+                    .foregroundColor(.black)
+                    .offset(y: -20)
+                SecureField("Enter Password", text: self.$password)
+                    .foregroundColor(.black)
+                    .frame(height: 35)
+                    .offset(y: -20)
+                
+                Button(action: {
+                    
+                }) {
+                    
+                    Image(systemName: "eye")
+                        .foregroundColor(.black)
+                        .offset(y: -20)
+                    
+                }
+
+                
+                
+            }.padding(.vertical, 20)
+            
+        }
+        .padding(.vertical)
+        .padding(.horizontal, 20)
+        //.background(Color.black.opacity(0.1))
+        .background(Color.white)
+        .cornerRadius(10)
+        .padding(.top, 25)
+        
+        Button(action: {
+            
+        }) {
+            Text("LOGIN")
+                .foregroundColor(.white)
+                .fontWeight(.bold)
+                .padding(.vertical)
+                .frame(width: UIScreen.main.bounds.width - 100)
+        }
+        .frame(height: 60)
+        .font(.system(size: 20))
+        .background(LinearGradient(gradient: .init(colors: [Color("Color2"), Color("Color1"), Color("Color")]), startPoint: .leading, endPoint: .trailing))
+        .cornerRadius(8)
+        .offset(y: -45)
+        .padding(.bottom, -40)
+        .shadow(radius: 25)
+        
+        
+    }
+}
+
+struct RegisterView : View {
+    
+    @State var email = ""
+    @State var password = ""
+    @State var repassword = ""
+    
+    var body : some View {
+        VStack {
+            
+            HStack(spacing: 15) {
+                Image(systemName: "envelope")
+                    .foregroundColor(.black)
+                TextField("Enter Email Address", text: self.$email).foregroundColor(.black)
             }.padding(.vertical, 20)
             
             Divider()
@@ -90,13 +167,44 @@ struct LoginView : View {
                     .resizable()
                     .frame(width: 15, height: 18)
                     .foregroundColor(.black)
+                    .offset(y: -20)
                 SecureField("Enter Password", text: self.$password)
+                    .foregroundColor(.black)
+                    .frame(height: 35)
+                    .offset(y: -20)
                 
                 Button(action: {
                     
                 }) {
                     
                     Image(systemName: "eye")
+                        .foregroundColor(.black)
+                        .offset(y: -20)
+                    
+                }
+
+                
+                
+            }.padding(.vertical, 20)
+            
+            HStack(spacing: 15) {
+                Image(systemName: "lock")
+                    .resizable()
+                    .frame(width: 15, height: 18)
+                    .foregroundColor(.black)
+                    .offset(y: -20)
+                SecureField("Re-Enter", text: self.$repassword)
+                    .foregroundColor(.black)
+                    .frame(height: 35)
+                    .offset(y: -20)
+                
+                Button(action: {
+                    
+                }) {
+                    
+                    Image(systemName: "eye")
+                        .foregroundColor(.black)
+                        .offset(y: -20)
                     
                 }
 
@@ -105,5 +213,30 @@ struct LoginView : View {
             }.padding(.vertical, 20)
             
         }
+        .padding(.vertical)
+        .padding(.horizontal, 20)
+        //.background(Color.black.opacity(0.1))
+        .background(Color.white)
+        .cornerRadius(10)
+        .padding(.top, 25)
+        
+        Button(action: {
+            
+        }) {
+            Text("REGISTER")
+                .foregroundColor(.white)
+                .fontWeight(.bold)
+                .padding(.vertical)
+                .frame(width: UIScreen.main.bounds.width - 100)
+        }
+        .frame(height: 60)
+        .font(.system(size: 20))
+        .background(LinearGradient(gradient: .init(colors: [Color("Color2"), Color("Color1"), Color("Color")]), startPoint: .leading, endPoint: .trailing))
+        .cornerRadius(8)
+        .offset(y: -45)
+        .padding(.bottom, -40)
+        .shadow(radius: 25)
+        
+        
     }
 }

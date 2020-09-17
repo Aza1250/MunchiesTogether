@@ -85,8 +85,11 @@ struct LoginView : View {
             HStack(spacing: 15) {
                 Image(systemName: "envelope")
                     .foregroundColor(.black)
-                TextField("Enter Email Address", text: self.$email).foregroundColor(.black)
-            }.padding(.vertical, 20)
+                ZStack(alignment: .leading) {
+                    if email.isEmpty { Text("Enter Your Email").foregroundColor(.black).opacity(0.1) }
+                        TextField("", text: $email)
+                }
+            }.padding(.vertical, 10)
             
             
             Divider()
@@ -96,11 +99,15 @@ struct LoginView : View {
                     .resizable()
                     .frame(width: 15, height: 18)
                     .foregroundColor(.black)
-                    .offset(y: -20)
-                SecureField("Enter Password", text: self.$password)
+                    .offset(y: -15)
+                ZStack(alignment: .leading) {
+                    if email.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                        TextField("", text: $email)
+                }
                     .foregroundColor(.black)
-                    .frame(height: 35)
-                    .offset(y: -20)
+                    .frame(height: 65)
+                    .offset(y: -15)
+                
                 
                 Button(action: {
                     
@@ -108,13 +115,13 @@ struct LoginView : View {
                     
                     Image(systemName: "eye")
                         .foregroundColor(.black)
-                        .offset(y: -20)
+                        .offset(y: -15)
                     
                 }
 
                 
                 
-            }.padding(.vertical, 20)
+            }
             
         }
         .padding(.vertical)
@@ -133,11 +140,11 @@ struct LoginView : View {
                 .padding(.vertical)
                 .frame(width: UIScreen.main.bounds.width - 100)
         }
-        .frame(height: 60)
+        .frame(height: 50)
         .font(.system(size: 20))
         .background(LinearGradient(gradient: .init(colors: [Color("Color2"), Color("Color1"), Color("Color")]), startPoint: .leading, endPoint: .trailing))
         .cornerRadius(8)
-        .offset(y: -45)
+        .offset(y: -35)
         .padding(.bottom, -40)
         .shadow(radius: 25)
         
@@ -157,8 +164,11 @@ struct RegisterView : View {
             HStack(spacing: 15) {
                 Image(systemName: "envelope")
                     .foregroundColor(.black)
-                TextField("Enter Email Address", text: self.$email).foregroundColor(.black)
-            }.padding(.vertical, 20)
+                ZStack(alignment: .leading) {
+                    if email.isEmpty { Text("Enter Your Email").foregroundColor(.black).opacity(0.1) }
+                        TextField("", text: $email)
+                }
+            }.padding(.vertical, 10)
             
             Divider()
             
@@ -167,11 +177,12 @@ struct RegisterView : View {
                     .resizable()
                     .frame(width: 15, height: 18)
                     .foregroundColor(.black)
-                    .offset(y: -20)
-                SecureField("Enter Password", text: self.$password)
+                ZStack(alignment: .leading) {
+                    if email.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                        SecureField("", text: $email)
+                }
                     .foregroundColor(.black)
-                    .frame(height: 35)
-                    .offset(y: -20)
+                    .frame(height: 5)
                 
                 Button(action: {
                     
@@ -179,13 +190,14 @@ struct RegisterView : View {
                     
                     Image(systemName: "eye")
                         .foregroundColor(.black)
-                        .offset(y: -20)
                     
                 }
 
                 
                 
-            }.padding(.vertical, 20)
+            }.padding(.vertical, 10)
+           
+            Divider()
             
             HStack(spacing: 15) {
                 Image(systemName: "lock")
@@ -193,7 +205,10 @@ struct RegisterView : View {
                     .frame(width: 15, height: 18)
                     .foregroundColor(.black)
                     .offset(y: -20)
-                SecureField("Re-Enter", text: self.$repassword)
+                ZStack(alignment: .leading) {
+                    if email.isEmpty { Text("Re-Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                        SecureField("", text: $email)
+                }
                     .foregroundColor(.black)
                     .frame(height: 35)
                     .offset(y: -20)

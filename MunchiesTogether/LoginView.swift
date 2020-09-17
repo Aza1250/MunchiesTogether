@@ -14,7 +14,14 @@ struct HomeView: View {
         ZStack {
             LinearGradient(gradient: .init(colors: [Color("Color"), Color("Color1"), Color("Color2")]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
             
-            LogoView()
+            if UIScreen.main.bounds.height > 800 {
+                LogoView()
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    LogoView()
+                }
+            }
+            
             
         }
     }
@@ -28,7 +35,7 @@ struct LogoView: View {
         VStack() {
             Image("logo")
                 .resizable()
-                .frame(width: 200, height: 200)
+                .frame(width: 100, height: 100)
             
             HStack {
                 Button(action: {
@@ -65,13 +72,64 @@ struct LogoView: View {
                 
             }.background(Color.black.opacity(0.1))
             .clipShape(Capsule())
-            .padding(.top, 50)
+            .padding(.top, 20)
             
             if self.index == 1 {
                 LoginView()
             } else {
                 RegisterView()
             }
+            
+            Button(action: {
+                
+            }) {
+                
+                Text("Forget Password?")
+                    .foregroundColor(.white)
+                
+            }
+            .padding(.top, 15)
+            
+            HStack(spacing: 10) {
+                
+                Color.white.opacity(0.7)
+                    .frame(width: 20, height: 1)
+                
+                Text("Or")
+                    .foregroundColor(.white)
+                
+                Color.white.opacity(0.7)
+                    .frame(width: 20, height: 1)
+                
+            }
+            .padding(.top, 5)
+            
+            HStack {
+                
+                Button(action: {
+                    
+                }) {
+                    
+                    Image("Google")
+                        .renderingMode(.original)
+                        .padding()
+                }.background(Color.white)
+                .clipShape(Circle())
+                
+                Button(action: {
+                    
+                }) {
+                    
+                    Image("Google")
+                        .renderingMode(.original)
+                        .padding()
+                }.background(Color.white)
+                .clipShape(Circle())
+                .padding(.leading, 25)
+                
+            }
+            .padding(.top, 5)
+            
         }
         .padding()
     }
@@ -81,6 +139,7 @@ struct LoginView : View {
     
     @State var email = ""
     @State var password = ""
+    @State var secured = true
     
     var body : some View {
         VStack {
@@ -90,7 +149,7 @@ struct LoginView : View {
                 ZStack(alignment: .leading) {
                     if email.isEmpty { Text("Enter Your Email").foregroundColor(.black).opacity(0.1) }
                         TextField("", text: $email)
-                }
+                }.foregroundColor(.black)
             }.padding(.vertical, 10)
             
             
@@ -103,15 +162,29 @@ struct LoginView : View {
                     .foregroundColor(.black)
                     .offset(y: -15)
                 ZStack(alignment: .leading) {
-                    if email.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
-                        TextField("", text: $email)
+                    
+                    if self.secured {
+                    
+                    if password.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                        SecureField("", text: $password)
+                    } else {
+                        if password.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                            TextField("", text: $password)
+                    }
                 }
                     .foregroundColor(.black)
                     .frame(height: 65)
                     .offset(y: -15)
+                    
                 
                 
                 Button(action: {
+                    
+                    if secured {
+                        secured = false
+                    } else {
+                        secured = true
+                    }
                     
                 }) {
                     
@@ -159,6 +232,9 @@ struct RegisterView : View {
     @State var email = ""
     @State var password = ""
     @State var repassword = ""
+    @State var secured = true
+    @State var resecured = true
+
     
     var body : some View {
         VStack {
@@ -169,7 +245,7 @@ struct RegisterView : View {
                 ZStack(alignment: .leading) {
                     if email.isEmpty { Text("Enter Your Email").foregroundColor(.black).opacity(0.1) }
                         TextField("", text: $email)
-                }
+                }.foregroundColor(.black)
             }.padding(.vertical, 10)
             
             Divider()
@@ -180,14 +256,24 @@ struct RegisterView : View {
                     .frame(width: 15, height: 18)
                     .foregroundColor(.black)
                 ZStack(alignment: .leading) {
-                    if email.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
-                        SecureField("", text: $email)
+                    if self.secured {
+                    
+                    if password.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                        SecureField("", text: $password)
+                    } else {
+                        if password.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                            TextField("", text: $password)
+                    }
                 }
                     .foregroundColor(.black)
                     .frame(height: 5)
                 
                 Button(action: {
-                    
+                    if secured {
+                        secured = false
+                    } else {
+                        secured = true
+                    }
                 }) {
                     
                     Image(systemName: "eye")
@@ -208,15 +294,25 @@ struct RegisterView : View {
                     .foregroundColor(.black)
                     .offset(y: -20)
                 ZStack(alignment: .leading) {
-                    if email.isEmpty { Text("Re-Enter Your Password").foregroundColor(.black).opacity(0.1) }
-                        SecureField("", text: $email)
+                    if self.resecured {
+                    
+                    if repassword.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                        SecureField("", text: $repassword)
+                    } else {
+                        if repassword.isEmpty { Text("Enter Your Password").foregroundColor(.black).opacity(0.1) }
+                            TextField("", text: $repassword)
+                    }
                 }
                     .foregroundColor(.black)
                     .frame(height: 35)
                     .offset(y: -20)
                 
                 Button(action: {
-                    
+                    if resecured {
+                        resecured = false
+                    } else {
+                        resecured = true
+                    }
                 }) {
                     
                     Image(systemName: "eye")

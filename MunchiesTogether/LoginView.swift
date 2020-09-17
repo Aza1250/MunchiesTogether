@@ -32,9 +32,9 @@ struct LogoView: View {
             
             HStack {
                 Button(action: {
-                    
-                    self.index = 0
-                    
+                    withAnimation(.spring(response: 0.8, dampingFraction: 0.5, blendDuration: 0.5)) {
+                        self.index = 0
+                    }
                 }) {
 
                     Text("Register")
@@ -48,7 +48,9 @@ struct LogoView: View {
                 
                 Button(action: {
                     
-                    self.index = 1
+                    withAnimation(.spring(response: 0.8, dampingFraction: 0.5, blendDuration: 0.5)) {
+                        self.index = 1
+                    }
                     
                 }) {
 
